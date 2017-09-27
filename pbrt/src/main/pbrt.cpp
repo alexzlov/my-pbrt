@@ -1,6 +1,7 @@
 #include "pbrt.h"
+#include "logging.h"
 
-static void usage(const char *msg = nullptr) {
+static void usage(const char *msg = nullptr) {	
 	if (msg) fprintf(stderr, "pbrt: %s\n\n", msg);
 
 	fprintf(stderr, R"(
@@ -30,6 +31,8 @@ Reformatting options:
 
 
 int main(int argc, char *argv[]) {
+	google::InitGoogleLogging(argv[0]);
+	FLAGS_stderrthreshold = 1; // Warnings and above
 	Options options;
 	std::vector<std::string> filenames;
 
